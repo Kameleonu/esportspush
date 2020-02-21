@@ -1,15 +1,23 @@
 <h1>Test</h1>
 <script>
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', function() {
-    navigator.serviceWorker.register('/sw.js').then(function(registration) {
-      // Registration was successful
-      console.log('ServiceWorker registration successful with scope: ', registration.scope);
-    }, function(err) {
-      // registration failed :(
-      console.log('ServiceWorker registration failed: ', err);
-    });
-  });
+const check = () => {
+  if (!('serviceWorker' in navigator)) {
+    throw new Error('No Service Worker support!')
+  }
+  if (!('PushManager' in window)) {
+    throw new Error('No Push API Support!')
+  }
 }
+const registerServiceWorker = async () => {
+    const swRegistration = await navigator.serviceWorker.register('service-worker.js');
+    return swRegistration;
+}
+
+const main = async () => {
+    check();
+    const swRegistration = await registerServiceWorker();
+}
+
+main()
 
 </script>
