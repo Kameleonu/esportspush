@@ -7,3 +7,12 @@ self.addEventListener('activate', async () => {
       console.log('Error', err)
     }
   })
+
+  setInterval(
+    function displayNotification() {
+      if (Notification.permission == 'granted') {
+        navigator.serviceWorker.getRegistration().then(function(reg) {
+          reg.showNotification('Hello world!');
+        });
+      }
+    }, 5000)
