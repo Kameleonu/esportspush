@@ -2,6 +2,7 @@
 <button id="permission-btn" onclick="main()">Ask Permission</button>
 <script>
 const check = () => {
+  console.log('check ')
   if (!('serviceWorker' in navigator)) {
     throw new Error('No Service Worker support!')
   }
@@ -20,6 +21,7 @@ const requestNotificationPermission = async () => {
   }
 }
 const main = async () => {
+  console.log(main)
   check()
   const swRegistration = await registerServiceWorker()
   const permission = await requestNotificationPermission()
