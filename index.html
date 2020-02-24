@@ -1,5 +1,6 @@
 <h1>Test</h1>
 <button id="permission-btn" onclick="main()">Ask Permission</button>
+<button id="permission-btn" onclick="displayNotification()">Show Not</button>
 <script>
 const check = () => {
   console.log('check ')
@@ -26,4 +27,13 @@ const main = async () => {
   const swRegistration = await registerServiceWorker()
   const permission = await requestNotificationPermission()
 }
+
+function displayNotification() {
+  if (Notification.permission == 'granted') {
+    navigator.serviceWorker.getRegistration().then(function(reg) {
+      reg.showNotification('Hello world!');
+    });
+  }
+}
+
 </script>
